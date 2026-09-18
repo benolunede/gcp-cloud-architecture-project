@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-    # Step 1: Checkout the code from your repository
+    # Step 1: Checkout the code from repository
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    # Step 2: Install and configure Python for your Month 2/3 validation
+    # Step 2: Install and configure Python for Mt 2/3 validation
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -29,12 +29,12 @@ jobs:
         # Stop the build if there are Python syntax errors
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 
-    # Step 3: Install and initialize Terraform for your Month 1 validation
+    # Step 3: Install and initialize Terraform for Mt 1 validation
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v3
 
     - name: Validate Terraform Syntax
       run: |
-        cd month1-terraform
+        cd mt1-terraform
         terraform init -backend=false
         terraform validate
