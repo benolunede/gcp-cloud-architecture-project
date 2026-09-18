@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helsinki-flask-deployment
+  labels:
+    app: helsinki-flask
+spec:
+  replicas: 3 # Scales your application across 3 redundant pods
+  selector:
+    matchLabels:
+      app: helsinki-flask
+  template:
+    metadata:
+      labels:
+        app: helsinki-flask
+    spec:
+      containers:
+      - name: flask-api
+        # Set this to your local image name, or your Google Artifact Registry URI later
+        image: helsinki-flask-api:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: helsinki-flask-service
+spec:
+  type: LoadBalancer # Exposes your application to external network traffic
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: helsinki-flask
