@@ -17,7 +17,7 @@ spec:
       containers:
       - name: flask-api
         # Set this to your local image name, or your Google Artifact Registry URI later
-        image: helsinki-flask-api:v1
+        image: europe-north1-docker.pkg.dev/bernard-host-2580/helsinki-repo/flask-api:v1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
